@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <title>ITI Ankleshwar - Absconder Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .control-panel {
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+            background: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .control-panel label {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+        .control-panel input {
+            padding: 6px 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100px;
+            text-align: center;
+        }
+        .control-panel button {
+            padding: 8px 18px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .control-panel button:hover {
+            background-color: #218838;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #000;
+        }
+
+        .institution-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .top-right-info {
+            float: right;
+            text-align: left;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-weight: bold;
+            width: 45%;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .report-heading {
+            clear: both;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 10px 0 20px 0;
+            text-decoration: underline;
+        }
+
+        .form-row {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .input-line {
+            border: none;
+            border-bottom: 1px dotted #000;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0 4px;
+            outline: none;
+            font-weight: bold;
+            background-color: #fffdf0;
+        }
+
+        .inline-group {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .paragraph-text {
+            text-align: justify;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .bottom-section {
+            margin-top: 15px;
+            line-height: 2;
+        }
+
+        .signature-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            page-break-inside: avoid;
+        }
+
+        .signature-box {
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .control-panel {
+                display: none;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 10mm 15mm;
+            }
+            .input-line {
+                background-color: transparent;
+                border-bottom: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <label for="rollInput">ROLL NUMBER:</label>
+        <input type="number" id="rollInput" value="1" min="1" max="96" oninput="loadAbsconderData()">
+        <button onclick="window.print()">PRINT / PDF</button>
+    </div>
+
+    <!-- A4 Page Container -->
+    <div class="page">
+        <div class="institution-title">ઔદ્યોગિક તાલીમ સંસ્થા, અંકલેશ્વર</div>
+        
+        <div class="clearfix">
+            <div class="top-right-info">
+                <div>સુ.ઈ.શ્રીનું નામ:- <span id="instructorName">YUVRAJSINH K KOSAMIA</span></div>
+                <div>બેચ:- <span id="batchNo">84 A</span></div>
+                <div>એનરોલમેન્ટ નં:- <span id="enrollmentNo">403840018</span></div>
+                <div>સી.એમ.ડી. નં:- <span id="cmdNo">403/2026C/20</span></div>
+                <div>શીફ્ટ:- <span id="shiftName">FIRST</span></div>
+                <div>તારીખ:- <input type="text" class="input-line" style="width: 110px;" value="14/10/2026"></div>
+            </div>
+        </div>
+
+        <div class="report-heading">એબસ્કોન્ડર રીપોર્ટ</div>
+
+        <div class="form-row">
+            તાલીમાર્થીનું નામ: <input type="text" id="traineeNameInput" class="input-line" style="width: 78%;" value="MANISHBHAI DHARMESHBHAI VASAVA">
+        </div>
+
+        <div class="form-row">
+            સરનામું: <input type="text" id="traineeAddressInput" class="input-line" style="width: 86%;" value="PADMAVATI SOCIETY PRATHAMIK SHALA ANKLESHWAR 393001">
+        </div>
+
+        <div class="form-row" style="margin-top: 10px;">
+            <span class="inline-group">બેચ નં: <input type="text" id="tableBatch" class="input-line" style="width: 60px;" value="84 A"></span>
+            <span class="inline-group">ટ્રેડ: <input type="text" class="input-line" style="width: 140px;" value="Mechanic Diesel"></span>
+            <span class="inline-group">યુિનટ: <input type="text" class="input-line" style="width: 50px;" value="1"></span>
+            <span class="inline-group">રોલ નં: <input type="text" id="tableRoll" class="input-line" style="width: 50px;" value="1"></span>
+        </div>
+
+        <div class="paragraph-text">
+            ઉપરોક્ત તાલીમાથી કોઈપણ જાતની જાણ કર્યા સિવાય તા. <input type="text" class="input-line" style="width: 110px;" placeholder="તારીખ નાખો"> થી સંસ્થામાં ગેરહાજર રહે છે. તેમના બે રીપોર્ટ અગાઉ તા. <input type="text" class="input-line" style="width: 110px;" placeholder="તારીખ ૧"> અને તા. <input type="text" class="input-line" style="width: 110px;" placeholder="તારીખ ૨"> ના રોજ કરવામાં આવેલ છતા તેમની ગેર હાજરી અંગેની કોઈપણ પ્રકારની જાણ તેમના તરફથી કરવામાં આવેલ નથી. તો તેઓને એબસ્કોન્ડર જાહેર કરવા ભલામણ કરવામાં આવે છે. તેમજ તેઓ સંસ્થાકીય સ્ટાઈપેન્ડ હોલ્ડર છે.
+        </div>
+
+        <div class="bottom-section">
+            <div>તાલીમાર્થી સંસ્થામાં દાખલ તારીખ : <span id="admissionDate" style="font-weight: bold;">07/07/2026</span></div>
+            <div>સી એમ.ડી./ડીપોઝિટ રસીદ નંબર/ તારીખ : <span id="cmdReceipt" style="font-weight: bold;">403/2026C/20</span></div>
+            <div>સંસ્થામાં છેલ્લી હાજર તારીખ: <input type="text" class="input-line" style="width: 130px;" placeholder="તારીખ નાખો"></div>
+            <div>તારીખ: <input type="text" class="input-line" style="width: 100px;" value="14/10/2026"> -સુધી હાજરીનાં ટકા: <input type="text" class="input-line" style="width: 80px;" placeholder="ટકા %"> છે.</div>
+            <div>તાલીમાર્થીનું લોકર પંચ રૂબરૂ ખોલી સાધનો મેળવ્યા છે/નથી સાધનો બાકીની કિંમત સાથેનું લીસ્ટ સામેલ છે/નથી કોઈ પણ પ્રકારનું લેણુ બાકી નથી.</div>
+        </div>
+
+        <div style="margin-top: 35px; text-align: right;">
+            <div class="signature-box" style="display: inline-block; text-align: center;">
+                સુપરવાઈઝર ઈન્સ્ટ્રક્ટરનું નામ અને સહી<br><br><br>
+                (<span id="bottomInstructor">YUVRAJSINH K KOSAMIA</span>)
+            </div>
+        </div>
+
+        <div style="margin-top: 25px; text-align: justify; font-size: 13.5px;">
+            ઉપરોક્ત તાલીમાર્થીને એબસ્કોન્ડર જાહેર કરવા તથા બાકી તાલીમ ખર્ચ હોય તો વસુલ કરવા ભલામણ કરવામાં આવે છે.
+        </div>
+
+        <div style="margin-top: 35px; text-align: right;">
+            <div class="signature-box" style="display: inline-block; text-align: center;">
+                ફોરમેનનું નામ અને સહી<br><br><br>
+                (<span id="foremanName">G.I.RATHOD</span>)
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Trainee Database -->
+    <script>
+        const traineesData = [
+            { roll: 1, name: "MANISHBHAI DHARMESHBHAI VASAVA", address: "PADMAVATI SOCIETY PRATHAMIK SHALA ANKLESHWAR 393001", batch: "84 A", enrollment: "403840018", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/20", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 2, name: "SUJALBHAI RAMESHBHAI RATHOD", address: "NAVINAGARI DHAVAT DHAVAT 391210", batch: "84 A", enrollment: "403840019", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/22", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 3, name: "SIDDHARTHBHAI BALVANTBHAI PARMAR", address: "KONDH KONDH KONDH 393001", batch: "84 A", enrollment: "403840024", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/29", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 4, name: "MOHAMMAD MUNAF ASFAK SHAIKH", address: "202 GALAXY APARTMENT RAHMAT PARK ANKLESHWAR 393001", batch: "84 A", enrollment: "403840162", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/187", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 5, name: "FARHAN FIROZBHAI CHAUHAN", address: "NAVINAGARI JITALI JITALI 393001", batch: "84 A", enrollment: "403840175", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/201", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 6, name: "HITESH RANJEETBHAI MALI", address: "3,RAILWAY LINE ZUPADPATTI,GADKHOL 3 RAILWAY LINE ZUPADPATTI GADKHOL GADKHOL 393010", batch: "84 A", enrollment: "403840182", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/209", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 7, name: "DHRUVKUMAR HARESHBHAI RANA", address: "474 GUJARAT HOUSING BOARD SURTI BHAGOL ANKLESHWAR 393001", batch: "84 A", enrollment: "403840224", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/256", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 8, name: "AZAZ IMRAN SIDAT", address: "NAVAPARA FALIYU BHADI BHADI 394115", batch: "84 A", enrollment: "403840232", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/264", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 9, name: "KRISHKUMAR KAMLESHBHAI MACHHI", address: "S/O KAMLESHBHAI MACHHI HANUMAN FALIYU JHANOR 392215", batch: "84 A", enrollment: "403840245", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/279", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 10, name: "KRUNAL RAJNIKANT PADHIYAR", address: "BARI FALIYU NIKORA NIKORA 392030", batch: "84 A", enrollment: "403840277", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/316", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 11, name: "ZAKIRHUSEN LIYAKAT HUSHEN KAPADIYA", address: "C373 BARELI KHO NEAR SADHANA SCHOOL BHARUCH 392001", batch: "84 A", enrollment: "403840307", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/353", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 12, name: "VIVEK MAHESH RAJPUT", address: "SHREERAM CHOKRI CHAVAJ CHAVAJ 392001", batch: "84 A", enrollment: "403840321", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/372", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 13, name: "MOHMMAD SAJJAD MOHAMMAD SARFARAJ SHAIKH", address: "C1318 PASCHIM CHUNARWAD LAL BAJAR BHARUCH 392001", batch: "84 A", enrollment: "403840330", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/384", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 14, name: "RIZWANBEG MAKBULBEG MIRZA", address: "C 1495 LALBAZAR BHARUCH 392001", batch: "84 A", enrollment: "403840359", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/415", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 15, name: "AHMED ABDULSAMAD SEDU", address: "368 LUHAR FALIYU HATHURAN HATHURAN 394125", batch: "84 A", enrollment: "403840361", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/417", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 16, name: "MOHMED MUZAHID MIRFAN SHAIKH", address: "2871 GADARIYA WAD FATATELAV BHARUCH 392001", batch: "84 A", enrollment: "403840428", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/492", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 17, name: "AYAN YUSUFBHAI SHEKH", address: "NAVI NAGRI NABIPUR NABIPUR 392210", batch: "84 A", enrollment: "403840473", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/538", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 18, name: "ALFAZHHUSEN IMRANMIYA MALEK", address: "AMAN PARK SOCIETY, CHAKLASI ROAD, BHALEJ BHALEJ BHALEJ 388205", batch: "84 A", enrollment: "403840498", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/569", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 19, name: "HARSH KISHORRAV BORSE", address: "24 75 MARU FLAIYU RATAN TALAV BHARUCH 392001", batch: "84 A", enrollment: "403840555", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/633", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 20, name: "DEEPU SHANKAR SAHANI", address: "396 MEERANAGAR SARANGPUR 393001", batch: "84 A", enrollment: "403840558", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/636", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 21, name: "MAHAMMADFAYAZ LUKMAN ABHLI", address: "NAVI NAGRI NEAR PRIMARY SCHOOL VANTARSA 392220", batch: "84 A", enrollment: "403840589", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/672", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 22, name: "VISHNUBHAI RAMESHBHAI RATHVA", address: "PATEL FALIYA SINHADA SINHADA 391168", batch: "84 A", enrollment: "403840594", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/679", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 23, name: "MUBARAK ALTAFBHAI MAHAMMADBHAI SHEKH", address: "502 SABU STREET NABIPUR NABIPUR 392210", batch: "84 A", enrollment: "403840618", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/706", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 24, name: "MO REHAN SALAUDDIN KURESHI", address: "NABIPUR JIN ROAD NEAR MASJID NABIPUR 392210", batch: "84 A", enrollment: "403840621", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/711", instructor: "YUVRAJSINH K KOSAMIA", foreman: "G.I.RATHOD" },
+            { roll: 25, name: "SMIT ASHWIN PATEL", address: "NAVA DIVA NAVA DIVA NAVA DIVA 393001", batch: "84 B", enrollment: "403840632", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/724", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 26, name: "KRIS SUNILBHAI THAKOR", address: "BHALIYAWAD NO TEKRO MAHADEV MANDIR BHARUCH 392001", batch: "84 B", enrollment: "403840645", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/738", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 27, name: "SAGAR SANJAY VASAVA", address: "626 KAISAR STREET KOTHI KOTHI 392020", batch: "84 B", enrollment: "403840656", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/752", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 28, name: "MEHULBHAI MAHESHBHAI VASAVA", address: "TEKRA FALIYU DARIYA DARIYA 393110", batch: "84 B", enrollment: "403840683", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/784", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 29, name: "MOHAMMADZAID JILANI QURESHI", address: "555, TAD FALIYU CHAUTA NAKA ANKLESHWAR 393001", batch: "84 B", enrollment: "403840742", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/855", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 30, name: "VAIBHAV KIRITBHAI PATANVADIYA", address: "DUBAI TEKRI ZADESHWAR BHARUCH 392011", batch: "84 B", enrollment: "403840751", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/868", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 31, name: "SOHAMSINH RAJENDRASINH SOLANKI", address: "KHADKI FALIYU ANDADA ANDADA 393010", batch: "84 B", enrollment: "403840768", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/889", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 32, name: "DEEPKUMAR RAJESHBHAI PATEL", address: "KUMBHAR FALIYU NANGAL NANGAL 393020", batch: "84 B", enrollment: "403840807", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/933", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 33, name: "ANKITKUMAR RAJUBHAI VASAVA", address: "MOTI NAVI NAGARI KARELA KARELA 392025", batch: "84 B", enrollment: "403840822", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/950", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 34, name: "MITKUMAR PRAVINBHAI PATEL", address: "NAVA TARIYA NAVA TARIYA ANKLESHWAR 393020", batch: "84 B", enrollment: "403840833", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/962", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 35, name: "YASIN AFZAL NORAT", address: "JOGIYAT FALIYU ALUNJ ALUNJ 394115", batch: "84 B", enrollment: "403840854", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/986", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 36, name: "HEMDIP MAHESHBHAI YADAV", address: "KHODIYAR NAGAR KHODIYAR MANDIR PASE DAHEJ 392130", batch: "84 B", enrollment: "403840865", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1000", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 37, name: "KARTIK HITESHBHAI RATHOD", address: "NEW RATHODVAS ANKALVA ANKALVA 393030", batch: "84 B", enrollment: "403840879", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1018", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 38, name: "MIHIRKUMAR JITUBHAI VASAVA", address: "BAVALI FALIYU AMRATPURA AMRATPURA 393010", batch: "84 B", enrollment: "403840899", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1041", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 39, name: "RUDRAKSH SHIVKANT YADAV", address: "B 66 SAI LOK RESIDENCY GADKHOL 393001", batch: "84 B", enrollment: "403840904", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1048", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 40, name: "CHIRAGKUMAR MUKESHBHAI PATEL", address: "KUMBHAR FALIYU NAGAL ANKLESHWAR 393020", batch: "84 B", enrollment: "403840921", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1070", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 41, name: "ADAM ALTAF PATEL", address: "50 51 KHADKI STREET PARIEJ PARIEJ 392020", batch: "84 B", enrollment: "403840944", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1097", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 42, name: "SAGARKUMAR PRAKASHBHAI VAGHARI", address: "VANTA FALIYU DENVA DENVA 392110", batch: "84 B", enrollment: "403840955", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1110", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 43, name: "JATIN RAKESHBHAI VASAVA", address: "SONERI TEKARI URJANAGAR JHANOR 392215", batch: "84 B", enrollment: "403840970", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1126", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 44, name: "MARUF YUSUF NORAT", address: "NORAT FALIYU ALUNJ ALUNJ ALUNJ 394115", batch: "84 B", enrollment: "403840989", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1146", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 45, name: "BHAVESH KANUBHAI VASAVA", address: "BUS STAND FALIYU BHADBHUT BHADBHUT 392012", batch: "84 B", enrollment: "403841022", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1183", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 46, name: "SAMIRBHAI LAXMANBHAI MEDA", address: "RAMJI FALIYU NAVI DIVI NAVI DIVI 393001", batch: "84 B", enrollment: "403841030", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1192", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 47, name: "ANKIT UDAYSHANKAR YADAV", address: "KUSUMGAR COLONY CHHAMUCHHAL CHHAMUCHHAL 394110", batch: "84 B", enrollment: "403841045", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1209", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 48, name: "NISHUKUMAR BALKISHAN MUNI", address: "KUSUMGAR COLONY CHHAMUCHHAL CHHAMUCHHAL 394110", batch: "84 B", enrollment: "403841052", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1217", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 49, name: "HIMLESHKUMAR SURESHBHAI VASAVA", address: "VADI FALIYU PRATHAMIK SHALA DIWA NAVA DIWA 393001", batch: "84 C", enrollment: "403841065", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1231", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 50, name: "AYUSHBHAI SHAMJIBHAI MAKVANA", address: "ALEX FARM HOUSE UCHHALI UCHHALI 393001", batch: "84 C", enrollment: "403841088", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1258", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 51, name: "RONAKKUMAR RAKESHBHAI VASAVA", address: "TALAV FALIYU KOSAMADI KOSAMADI 393001", batch: "84 C", enrollment: "403841100", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1271", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 52, name: "DIVYESH RAJU VASAVA", address: "SON TALAVADI BHARUCH SON TALAVADI 392001", batch: "84 C", enrollment: "403841112", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1286", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 53, name: "JAYNIK MUKESHBHAI PATEL", address: "AT POST UCHEDIA TA JHAGADIA DIST BHARUCH 393110", batch: "84 C", enrollment: "403841133", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1308", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 54, name: "VANSHITKUMAR RAMESHBHAI VASAVA", address: "NAVI VASHAHAT MOTHIYA MOTHIYA 393030", batch: "84 C", enrollment: "403841149", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1325", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 55, name: "KARANBHAI SANJAYBHAI VAGHARI", address: "SHUKLATIRH BHARUCH SHUKLATIRTH 392030", batch: "84 C", enrollment: "403841158", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1336", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 56, name: "SUJAL KUMAR VIJAY BHAI VASAVA", address: "NAVI NAGARI SHUKLATIRTH SHUK BHARUCH 392030", batch: "84 C", enrollment: "403841170", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1349", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 57, name: "YAGNIKBHAI JITENDRAKUMAR PANDYA", address: "28 SHREEJIJ VILLA SOCIETY ANDADA SAMOR 393010", batch: "84 C", enrollment: "403841182", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1363", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 58, name: "BHAVESHKUMAR DHANJIBHAI VASAVA", address: "NISHAL FALIYU NAVADIVA NAVADIVA 393001", batch: "84 C", enrollment: "403841199", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1381", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 59, name: "NITESH NILAMBER MISHRA", address: "73 SILVER CITY JITALI JITALI 393001", batch: "84 C", enrollment: "403841210", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1393", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 60, name: "DHARMESHKUMAR BABUBHAI VASAVA", address: "JUNO BHILVADO TANKARIA TANKARIA 392240", batch: "84 C", enrollment: "403841221", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1406", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 61, name: "KRUNALKUMAR RANJITBHAI VASAVA", address: "NANNUMIYA JUPADPATTI MAHAMMADPURA BHARUCH 392001", batch: "84 C", enrollment: "403841235", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1422", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 62, name: "ASHISHKUMAR DILIPBHAI MAHTO", address: "331 SUNDAR RESIDENCY RAJPIPLA ROAD ANKLESHWAR 393001", batch: "84 C", enrollment: "403841249", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1439", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 63, name: "ARUN AJAYBHAI VASAVA", address: "MAHAKALI FALIYU MAKTAMPURA BHARUCH 392012", batch: "84 C", enrollment: "403841260", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1451", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 64, name: "RAJKUMAR MAHESHBHAI VASAVA", address: "AMLA FALIYU GHODA GHODA 393135", batch: "84 C", enrollment: "403841278", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1471", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 65, name: "KUNALKUMAR MAHESHBHAI VASAVA", address: "NAVI NAGARI DODWADA DODWADA 393135", batch: "84 C", enrollment: "403841289", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1484", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 66, name: "VIRALKUMAR NARESHBHAI VASAVA", address: "MODI FARIYU NAVA KASIYA NAVA KASIYA 393001", batch: "84 C", enrollment: "403841300", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1498", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 67, name: "HASHNEN ARIF BABARIYA", address: "BABARIYA COLONY ADOL ROAD BHARUCH 392240", batch: "84 C", enrollment: "403841315", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1516", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 68, name: "TANVIR YASIN BABARIYA", address: "BABARIYA COLONY TANKARIYA BHARUCH 392240", batch: "84 C", enrollment: "403841322", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1523", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 69, name: "JAINUL JAVID PATEL", address: "GAM PANCHAYAT FALIYU NANDELAV NADELAV 392015", batch: "84 C", enrollment: "403841334", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1536", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 70, name: "RUDRAKUMAR MUKESHBHAI VASAVA", address: "OFFICE FALIYU UCHHALI UCHHALI 393001", batch: "84 C", enrollment: "403841350", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1554", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 71, name: "KRUNALKUMAR GANESHBHAI VASAVA", address: "OFFICE FALIYU UCHHALI UCHHALI 393001", batch: "84 C", enrollment: "403841369", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1574", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 72, name: "VIKRAMBHAI MUKESHBHAI VASAVA", address: "MOTALI MOTALI MOTALI 392001", batch: "84 C", enrollment: "403841375", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1582", instructor: "Yuvrajsinh K Kosamia", foreman: "G.I.RATHOD" },
+            { roll: 73, name: "DEVANSH DHANANJAY MISHRA", address: "173 SHUKLA STREET BORBATABET BORBATABET 392012", batch: "84 D", enrollment: "403841381", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1588", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 74, name: "NITINBHAI VIJAYBHAI VASAVA", address: "DERA FALIYU NEAR MAHADEV TEMPLE TRALSA 392020", batch: "84 D", enrollment: "403841399", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1610", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 75, name: "ANURAG RAMAND CHAUHAN", address: "DANDIYABAZAR LODVANOTEKRO JOPARPATI BHARUCH BHARUCH 392001", batch: "84 D", enrollment: "403841410", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1622", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 76, name: "CHAITLAL ELEACHI DAS", address: "236 SHAKTINAGAR G H BOARD SHAKTINATH CIRCLE BHARUCH 392001", batch: "84 D", enrollment: "403841421", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1634", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 77, name: "AKASH RAMESH HARIJAN", address: "ROHIT VAS DENVA DENVA 392110", batch: "84 D", enrollment: "403841432", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1647", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 78, name: "SHIVAM ASHWINBHAI GOHIL", address: "MANDIR FALIYU KARMANI KARMANI 392210", batch: "84 D", enrollment: "403841445", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1662", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 79, name: "JAY SHAILESHBHAI VASAVA", address: "4-97 NAVAI NAGRI KAVITHA KAVITHA 392210", batch: "84 D", enrollment: "403841459", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1678", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 80, name: "NIKUNJBHAI NATVARBHAI VASAVA", address: "100 COLONI MAHAKALI MANDIR PANOLI 394115", batch: "84 D", enrollment: "403841470", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1690", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 81, name: "ARJUNBHAI RAMESHBHAI RATHOD", address: "ANKALVA ANKALVA ANKALVA 393030", batch: "84 D", enrollment: "403841482", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1703", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 82, name: "MOINKHAN MUSTUFAKHAN PATHAN", address: "VACHALU FALIYU SARTHAN ANKLESHWAR 393001", batch: "84 D", enrollment: "403841499", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1721", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 83, name: "NEEL NIRANJAN PATEL", address: "PATEL FALIYU KARJAN KARJAN 392210", batch: "84 D", enrollment: "403841510", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1735", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 84, name: "HARDIKBHAI HANUMANBHAI RAJPUT", address: "SON TALAVADI GUJARAT GAS COMPANY BHARUCH 392001", batch: "84 D", enrollment: "403841528", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1755", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 85, name: "HARSHAL KUMAR SANJAY BHAI VASAVA", address: "VADI FADIYU VADI VADI 394440", batch: "84 D", enrollment: "403841539", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1769", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 86, name: "SAGAR SURESHBHAI VASAVA", address: "426 NAVINAGARI SHERPURA SHERPURA 392015", batch: "84 D", enrollment: "403841551", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1781", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 87, name: "RANVEERBHAI SANJAYBHAI PADHIYAR", address: "UBHU FALIYU DHARMASHALA DHARMASHALA 392215", batch: "84 D", enrollment: "403841562", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1792", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 88, name: "PRIYANSHU JAYESHBHAI VASAVA", address: "TAKI FALIYU BHILWADA KHARCHI KHARCHI 393001", batch: "84 D", enrollment: "403841580", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1812", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 89, name: "TEJASHKUMAR SANJAYBHAI RATHOD", address: "91 NISHAL FALIYU BHATGAM BHATGAM 394540", batch: "84 D", enrollment: "403841591", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1826", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 90, name: "PRATHAM DHANSUKHBHAI RATHOD", address: "ACHARJI NO CHAL NEAR GEB BHARUCH 392001", batch: "84 D", enrollment: "403841602", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1838", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 91, name: "SHEHARI SAMIR SAEED", address: "HINGALAA ABAD NAGAR HINGALAA 392210", batch: "84 D", enrollment: "403841619", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1857", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 92, name: "SAAD YUSUF PATEL", address: "SHANKARPRA FALIYA JAMBUSAR BHADKODRA 392155", batch: "84 D", enrollment: "403841620", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1858", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 93, name: "ARYANKUMAR BABUBHAI VASAVA", address: "KEBIN FALIYU PANOLI PANOLI 394115", batch: "84 D", enrollment: "403841639", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1881", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 94, name: "RUDRA DIPAKBHAI VASAVA", address: "1666-3,LAL BUNGLOW COMPOUND OPP. D.S.P OFFICE,KARI TALAVDI BHARUCH 392001", batch: "84 D", enrollment: "403841648", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1892", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 95, name: "JAY GOVINDBHAI DAFDA", address: "BHARUCH BHARUCH BHARUCH 392001", batch: "84 D", enrollment: "403841655", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1900", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 96, name: "REHAN ILYAS AHMAD BOBAT", address: "LIMBADA FALIYU HATHURAN LIMBADA FALIYU 394125", batch: "84 D", enrollment: "403841669", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1915", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" }
+        ];
+
+        function loadAbsconderData() {
+            const rollNum = parseInt(document.getElementById('rollInput').value);
+            const trainee = traineesData.find(t => t.roll === rollNum);
+
+            if (trainee) {
+                document.getElementById('instructorName').innerText = trainee.instructor;
+                document.getElementById('batchNo').innerText = trainee.batch;
+                document.getElementById('enrollmentNo').innerText = trainee.enrollment;
+                document.getElementById('cmdNo').innerText = trainee.cmd;
+                document.getElementById('shiftName').innerText = trainee.shift;
+                
+                document.getElementById('traineeNameInput').value = trainee.name;
+                document.getElementById('traineeAddressInput').value = trainee.address;
+                document.getElementById('tableBatch').value = trainee.batch;
+                document.getElementById('tableRoll').value = trainee.roll;
+                
+                document.getElementById('admissionDate').innerText = trainee.admission;
+                document.getElementById('cmdReceipt').innerText = trainee.cmd;
+                document.getElementById('bottomInstructor').innerText = trainee.instructor;
+                document.getElementById('foremanName').innerText = trainee.foreman;
+            }
+        }
+
+        window.onload = function() {
+            loadAbsconderData();
+        }
+    </script>
+</body>
+</html>
