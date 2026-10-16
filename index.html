@@ -126,10 +126,15 @@
             line-height: 2;
         }
 
+        .locker-line {
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
         .signature-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
+            margin-top: 35px;
             page-break-inside: avoid;
         }
 
@@ -197,7 +202,7 @@
         <div class="form-row" style="margin-top: 10px;">
             <span class="inline-group">બેચ નં: <input type="text" id="tableBatch" class="input-line" style="width: 60px;" value="84 A"></span>
             <span class="inline-group">ટ્રેડ: <input type="text" class="input-line" style="width: 140px;" value="Mechanic Diesel"></span>
-            <span class="inline-group">યુિનટ: <input type="text" class="input-line" style="width: 50px;" value="1"></span>
+            <span class="inline-group">યુનિટ: <input type="text" class="input-line" style="width: 50px;" value="1"></span>
             <span class="inline-group">રોલ નં: <input type="text" id="tableRoll" class="input-line" style="width: 50px;" value="1"></span>
         </div>
 
@@ -210,24 +215,28 @@
             <div>સી એમ.ડી./ડીપોઝિટ રસીદ નંબર/ તારીખ : <span id="cmdReceipt" style="font-weight: bold;">403/2026C/20</span></div>
             <div>સંસ્થામાં છેલ્લી હાજર તારીખ: <input type="text" class="input-line" style="width: 130px;" placeholder="તારીખ નાખો"></div>
             <div>તારીખ: <input type="text" class="input-line" style="width: 100px;" value="14/10/2026"> -સુધી હાજરીનાં ટકા: <input type="text" class="input-line" style="width: 80px;" placeholder="ટકા %"> છે.</div>
-            <div>તાલીમાર્થીનું લોકર પંચ રૂબરૂ ખોલી સાધનો મેળવ્યા છે/નથી સાધનો બાકીની કિંમત સાથેનું લીસ્ટ સામેલ છે/નથી કોઈ પણ પ્રકારનું લેણુ બાકી નથી.</div>
+            <div class="locker-line">તાલીમાર્થીનું લોકર પંચ રૂબરૂ ખોલી સાધનો મેળવ્યા છે/નથી સાધનો બાકીની કિંમત સાથેનું લીસ્ટ સામેલ છે/નથી કોઈ પણ પ્રકારનું લેણુ બાકી નથી.</div>
         </div>
 
-        <div style="margin-top: 35px; text-align: right;">
+        <div style="margin-top: 25px; text-align: right;">
             <div class="signature-box" style="display: inline-block; text-align: center;">
                 સુપરવાઈઝર ઈન્સ્ટ્રક્ટરનું નામ અને સહી<br><br><br>
                 (<span id="bottomInstructor">YUVRAJSINH K KOSAMIA</span>)
             </div>
         </div>
 
-        <div style="margin-top: 25px; text-align: justify; font-size: 13.5px;">
+        <div style="margin-top: 20px; text-align: justify; font-size: 13.5px;">
             ઉપરોક્ત તાલીમાર્થીને એબસ્કોન્ડર જાહેર કરવા તથા બાકી તાલીમ ખર્ચ હોય તો વસુલ કરવા ભલામણ કરવામાં આવે છે.
         </div>
 
-        <div style="margin-top: 35px; text-align: right;">
+        <div class="signature-container">
             <div class="signature-box" style="display: inline-block; text-align: center;">
                 ફોરમેનનું નામ અને સહી<br><br><br>
                 (<span id="foremanName">G.I.RATHOD</span>)
+            </div>
+            <div class="signature-box" style="display: inline-block; text-align: center;">
+                આચાર્યશ્રી<br><br><br>
+                ઔ.તા.સંસ્થા, અંકલેશ્વર
             </div>
         </div>
     </div>
@@ -328,7 +337,7 @@
             { roll: 91, name: "SHEHARI SAMIR SAEED", address: "HINGALAA ABAD NAGAR HINGALAA 392210", batch: "84 D", enrollment: "403841619", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1857", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
             { roll: 92, name: "SAAD YUSUF PATEL", address: "SHANKARPRA FALIYA JAMBUSAR BHADKODRA 392155", batch: "84 D", enrollment: "403841620", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1858", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
             { roll: 93, name: "ARYANKUMAR BABUBHAI VASAVA", address: "KEBIN FALIYU PANOLI PANOLI 394115", batch: "84 D", enrollment: "403841639", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1881", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
-            { roll: 94, name: "RUDRA DIPAKBHAI VASAVA", address: "1666-3,LAL BUNGLOW COMPOUND OPP. D.S.P OFFICE,KARI TALAVDI BHARUCH 392001", batch: "84 D", enrollment: "403841648", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1892", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
+            { roll: 94, name: "RUDRA DIPAKBHAI VASAVA", batch: "84 D", enrollment: "403841648", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1892", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
             { roll: 95, name: "JAY GOVINDBHAI DAFDA", address: "BHARUCH BHARUCH BHARUCH 392001", batch: "84 D", enrollment: "403841655", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1900", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" },
             { roll: 96, name: "REHAN ILYAS AHMAD BOBAT", address: "LIMBADA FALIYU HATHURAN LIMBADA FALIYU 394125", batch: "84 D", enrollment: "403841669", shift: "FIRST", admission: "07/07/2026", cmd: "403/2026C/1915", instructor: "P.B.GOHIL", foreman: "G.I.RATHOD" }
         ];
